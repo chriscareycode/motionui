@@ -7,6 +7,11 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+
+  this.route('list', { path: '/list' });
+  this.route('live', { path: '/live' });
+  this.route('single', { path: '/single/:camera' });
+
 });
 
 export default Router;

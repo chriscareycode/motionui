@@ -1,0 +1,26 @@
+<div style="position:fixed;top:5px;right:10px;padding:4px;border: 1px solid #ccc;background-color:white;">
+  <strong>{{files.length}}</strong> recordings
+</div>
+
+{{!-- {{video-player}} --}}
+
+{{#each files as |file|}}
+<div id="div-{{file}}" style="border-top: 2px solid #ccc;">
+  <div style="margin-top: 10px;">
+    <div>{{file}}</div>
+    <button {{action 'doDeleteAction' file}}>Delete</button>
+    <button {{action 'doSaveAction' file}}>Save</button>
+    <a href="http://10.69.0.25:4205/raw-motion-files/{{file}}.avi.ogv">
+      <button>Play</button>
+    </a>
+  </div>
+
+  <div style="margin-top: 10px;">
+    <a href="http://10.69.0.25:4205/raw-motion-files/{{file}}.avi.ogv">
+      <img src="http://10.69.0.25:4205/raw-motion-files/{{file}}.jpg">
+    </a>
+  </div>
+</div>
+{{/each}}
+
+{{yield}}

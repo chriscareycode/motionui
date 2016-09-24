@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #111;
+  color: #ddd;
+}
+img.camera25 {
+  width: 25vw;
+  height: calc(0.75 * 25vw);
+}
+img.camera33 {
+  width: 33vw;
+  height: calc(0.75 * 33vw);
+}
+img.camera50 {
+  width: 49vw;
+  height: calc(0.72 * 48vw);
+}
+img.camera100 {
+  width: 100vw;
+  height: calc(0.72 * 100vw);
+}
+
+img#imgTemp {
+    width: 98vw;
+    background-color: #ccc;
+    margin-left: 10px;
+}
+img#imgWeekly {
+    width: 98vw;
+    background-color: #ccc;
+    margin-left: 10px;
+}
+
+
+div.temptext {
+  text-align: center;
+  margin-top: 8px;
+}
+
+#lastTemp {
+  font-size: 2em;
+}

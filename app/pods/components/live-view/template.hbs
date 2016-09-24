@@ -1,0 +1,50 @@
+<table>
+    <tr>
+        <td>{{#link-to 'single' 'infra'}}<img id="camera-infra" class="camera50" src="" height=480 width=640 />{{/link-to}}</td>
+        <td>{{#link-to 'single' 'green2'}}<img id="camera-green2" class="camera50" src="" height=480 width=640 />{{/link-to}}</td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td>{{#link-to 'single' 'motion'}}<img id="camera-motion" class="camera50" src="" height=480 width=640 />{{/link-to}}</td>
+        <td>{{#link-to 'single' 'green3'}}<img id="camera-green3" class="camera50" src="" height=480 width=640 />{{/link-to}}</td>
+
+    </tr>
+</table>
+
+<!--
+<table>
+    <tr>
+    <td><a href="camera-white.html"><img id="camera-white" class="camera50" src="" height=480 width=640 /></a></td>
+        <td><a href="garage.html"><img id="camera3" class="camera50" src="" height=480 width=640 /></a></td>
+        <td><a href="camera-pi3.html"><img id="camera-pi3" class="camera33" src="" height=480 width=640 /></a></td>
+        <td><a href="camera0.html"><img id="camera0" class="camera50" src="" height=480 width=640 /></a></td>
+        <td><a href="camera1.html"><img id="camera1" class="camera50" src="" height=480 width=640 /></a></td>
+        <td><a href="motion.html"><img id="camera2" class="camera50" src="" height=480 width=640 /></a></td>
+        <td><a href="garage.html"><img id="camera3" class="camera50" src="" height=480 width=640 /></a></td>
+    </tr>
+</table>
+-->
+
+
+<div class="temptext"><strong>Office Temperature: <span id="lastTemp">0</span></strong> Last Refresh: <span id="lastrefresh">Never</span></div>
+
+<img id="imgTemp" src=""><br>
+
+<img id="imgWeekly">
+
+<div>
+<a href="https://securespot.net/cgi-bin/smokeping.cgi?target=Home.ComcastModem">
+  <img src="https://securespot.net/smokeping/images/Home/ComcastModem_last_10800.png">
+</a>
+</div>
+
+<div>
+<a href="https://securespot.net/cgi-bin/smokeping.cgi?target=Home.ComcastModem">
+  <img src="https://securespot.net/smokeping/images/Home/ComcastModem_last_108000.png">
+</a>
+</div>
+
+
+
+{{yield}}

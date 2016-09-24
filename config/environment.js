@@ -3,6 +3,7 @@
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'motionui',
+    podModulePrefix: 'motionui/pods',
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
