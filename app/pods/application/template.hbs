@@ -1,8 +1,31 @@
-<div style="position:fixed;top:0px;right:0;width: 33vw;opacity: 0.75;text-align:right;padding:10px;">
-
-{{#link-to 'list'}}<button>list files</button>{{/link-to}}
-
-{{#link-to 'live'}}<button>live stream</button>{{/link-to}}
+<div class="ui top fixed menu">
+  <div class="item">
+    <img src="/images/logo.png">
+  </div>
+  {{#link-to 'index' class='item'}}Home{{/link-to}}
+  {{#link-to 'list' class='item'}}List Files{{/link-to}}
+  {{#link-to 'live' class='item'}}Live Stream{{/link-to}}
 </div>
 
+{{!-- <div class="ui bottom fixed menu">
+  <div class="item">
+    <img src="/images/logo.png">
+  </div>
+  <a class="item">Features</a>
+  <a class="item">Testimonials</a>
+  <a class="item">Sign-in</a>
+</div> --}}
+
+<p></p>
+<p></p>
+
+{{!-- <div style="position:fixed;top:0px;right:0;width: 33vw;opacity: 0.75;text-align:right;padding:10px;">
+
+
+
+  {{#link-to 'live'}}<button>live stream</button>{{/link-to}}
+
+</div> --}}
+<div style="margin-top: 40px;">
 {{outlet}}
+</div>
