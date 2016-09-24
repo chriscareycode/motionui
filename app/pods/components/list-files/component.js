@@ -21,11 +21,10 @@ export default Ember.Component.extend({
 
   doDelete(file) {
 
-    const that = this;
     const payload = { file: file };
     const files = this.get('files');
 
-    $.ajax({
+    Ember.$.ajax({
       url: 'http://10.69.0.25:4205/api/delete',
       type: 'POST',
       data: payload
@@ -33,7 +32,7 @@ export default Ember.Component.extend({
       console.log(data);
 
       // remove from DOM
-      $('#div-' + file).remove();
+      Ember.$('#div-' + file).remove();
       // remove from array
       files.removeObject(file);
       // files = files.filter(function(f) {
@@ -48,11 +47,10 @@ export default Ember.Component.extend({
 
   doSave(file) {
 
-    const that = this;
     const payload = { file: file };
     const files = this.get('files');
 
-    $.ajax({
+    Ember.$.ajax({
       url: 'http://10.69.0.25:4205/api/save',
       type: 'POST',
       data: payload
@@ -60,7 +58,7 @@ export default Ember.Component.extend({
       console.log(data);
 
       // remove from DOM
-      $('#div-' + file).remove();
+      Ember.$('#div-' + file).remove();
       // remove from array
       files.removeObject(file);
       // files = files.filter(function(f) {
@@ -77,7 +75,7 @@ export default Ember.Component.extend({
     console.log('new');
     let that = this;
 
-    $.ajax({
+    Ember.$.ajax({
       url: 'http://10.69.0.25:4205/api/files/list'
     }).done(function(data) {
       console.log(data);

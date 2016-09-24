@@ -6,7 +6,6 @@ export default Ember.Component.extend({
 
   didInsertElement() {
 
-    let that = this;
     let camera = this.get('camera');
     let d = new Date();
     let src = '';
