@@ -6,6 +6,8 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "cors": "^2.7.1",
-    "express": "4.x"
+    "express": "4.x",
+    "glob": "^7.1.1",
+    "request": "^2.78.0"
   }
 }

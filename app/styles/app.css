@@ -41,3 +41,39 @@ div.temptext {
 #lastTemp {
   font-size: 2em;
 }
+
+.live-view table td {
+  position: relative;
+}
+.live-view .floater {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+}
+
+.blinky {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  text-decoration: blink;
+  background-color: red;
+  border-radius: 8px;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.0;
+  }
+}
+@-webkit-keyframes blink {
+  50% {
+    opacity: 0.0;
+  }
+}
+.blink {
+  animation: blink 1s step-start 0s infinite;
+  -webkit-animation: blink 1s step-start 0s infinite;
+}

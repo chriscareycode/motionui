@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   // didInsertElement: function() {
 
   // }
+  node: Ember.inject.service('node'),
 
   files: [],
 
@@ -23,9 +24,10 @@ export default Ember.Component.extend({
 
     const payload = { file: file };
     const files = this.get('files');
+    const hostAndPort = this.get('node').getHostAndPort();
 
     Ember.$.ajax({
-      url: 'http://10.69.0.25:4205/api/delete',
+      url: 'http://' + hostAndPort + '/api/delete',
       type: 'POST',
       data: payload
     }).done(function(data) {
@@ -49,9 +51,10 @@ export default Ember.Component.extend({
 
     const payload = { file: file };
     const files = this.get('files');
+    const hostAndPort = this.get('node').getHostAndPort();
 
     Ember.$.ajax({
-      url: 'http://10.69.0.25:4205/api/save',
+      url: 'http://' + hostAndPort + '/api/save',
       type: 'POST',
       data: payload
     }).done(function(data) {
@@ -74,9 +77,10 @@ export default Ember.Component.extend({
   didInsertElement() {
     console.log('new');
     let that = this;
+    const hostAndPort = this.get('node').getHostAndPort();
 
     Ember.$.ajax({
-      url: 'http://10.69.0.25:4205/api/files/list'
+      url: 'http://' + hostAndPort + '/api/files/list'
     }).done(function(data) {
       console.log(data);
       that.processFiles(data);

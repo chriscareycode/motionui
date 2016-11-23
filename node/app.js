@@ -1,4 +1,4 @@
-
+'use strict';
 /*
  * TODO:
  * - Add a settings file and move the username password for Nagios in there.
@@ -15,8 +15,12 @@ var cors = require('cors');
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
+var glob = require('glob');
 
 var bodyParser = require('body-parser');
+var request = require('request');
+
+var port = 4300;
 
 // //=============================================================================
 // // Settings
@@ -149,6 +153,40 @@ var bodyParser = require('body-parser');
 
 // }
 
+var motionDir = '/home/pi/motion/';
+
+var doDelete = function(req, res) {
+  //var file = req.params.file;
+  var file = req.body.file;
+  console.log('delete files ' + file + '*');
+
+  glob.glob(motionDir + file + "*", function (er, files) {
+    files.forEach(function(e) {
+      console.log('delete glob ' + e);
+      fs.unlink(e,function(err){
+        if(err) return console.log(err);
+        console.log('file deleted successfully: ' + e);
+      });
+    });
+    res.json({ success: true, message: 'Deleting files', files: files });
+  });
+};
+
+var doSave = function(req, res) {
+  //var file = req.params.file;
+  var fileToSave = req.body.file;
+  console.log('save files ' + fileToSave + '*');
+
+  glob.glob(motionDir + fileToSave + "*", function (er, files) {
+    files.forEach(function(e) {
+      console.log('move glob ' + e);
+      let filename = e.split("/").pop();
+      fs.rename(e, motionDir + 'save/' + filename);
+    });
+    res.json({ success: true, message: 'Saved files', files: files });
+  });
+};
+
 //=============================================================================
 // Set up routes
 //=============================================================================
@@ -160,11 +198,72 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
+//express.mime.type['ogv'] = 'video/ogg';
+express.static.mime.define({
+  'video/ogg': ['ogv'],
+});
+
 app.use('/', express.static('../dist'));
+// app.get('/', function(req, res) {
+//   res.send('hello ' + new Date());
+// });
 
-app.get('/files/list', function(req, res) {
+// TODO
+// delete file(s)
+app.get('/api/motion/command/:camera/*', function(req, res) {
+  console.log('got GET /api/motion/command/:camera/*');
+  const commands = req.url.split('/').slice(5);
+  const command = commands.join('/');
+  console.log(req.url);
+  console.log(commands);
+  console.log(command);
 
-  fs.readdir('.', function (err, files) {
+  const camera = req.params.camera;
+
+  // talk to the camera
+  const url ='http://' + camera + ':8080/' + command;
+  request(url, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      console.log('node got response');
+      console.log(body); // Show the HTML for the Google homepage.
+
+      res.json({
+        success: true,
+        successMessage: 'remote command success',
+        camera: camera,
+        commands: commands,
+        body: body
+      });
+    } else {
+      res.json({
+        success: false,
+        successMessage: 'remote command failure',
+        camera: camera,
+        commands: commands,
+        body: body
+      });
+    }
+  });
+
+  console.log(camera);
+});
+
+app.post('/api/motion/command/:camera/*', function(req, res) {
+  console.log('got POST /api/motion/command/:camera/*');
+  //const commands = req.url.split('/').slice(5);
+  //const command = commands.join('/');
+  //console.log(req.url);
+  //console.log(commands);
+  //console.log(command);
+  console.log('request body');
+  console.log(req.body);
+});
+
+app.use('/raw-motion-files', express.static(motionDir));
+
+app.get('/api/files/list', function(req, res) {
+
+  fs.readdir(motionDir, function (err, files) {
     // "files" is an Array with files names
 
     //res.setHeader('Content-Type', 'application/json');
@@ -174,7 +273,6 @@ app.get('/files/list', function(req, res) {
       files: files
     });
 
-
   }, function(err) {
     //res.setHeader('Content-Type', 'application/json');
     res.json({
@@ -183,18 +281,30 @@ app.get('/files/list', function(req, res) {
     });
   });
 
+});
 
+app.post('/api/delete', function(req, res) {
+   doDelete(req, res);
+});
+
+app.post('/api/save', function(req, res) {
+   doSave(req, res);
+});
+
+// app.get('/nagios/:page', function(req, res) {
+//    getNagios(req, res);
+// });
+
+
+
+// TODO: serve catch-all to the index file
+
+
+app.get('*', function(req, res) {
 
 });
 
-app.post('/settings', function(req, res) {
-   saveSettings(req, res);
-});
 
-app.get('/nagios/:page', function(req, res) {
-   getNagios(req, res);
-});
+app.listen(port);
 
-app.listen(3001);
-
-console.log('Listening on port 3001...');
+console.log('Listening on port ' + port + '...');

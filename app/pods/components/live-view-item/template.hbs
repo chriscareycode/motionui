@@ -1,0 +1,20 @@
+<div class="floater">
+
+  <span style="font-size: 1.3em;font-weight: bold;">{{name}}</span>
+
+  &nbsp;
+
+{{#if isMotionSupportsCommands}}
+  {{#if isDetectionStatusActive}}
+  ACTIVE <div class="blinky blink">&nbsp;</div>
+  <button {{action "cameraDeactivateAction"}}>Deactivate</button>
+  {{else}}
+  PAUSED
+  <button {{action "cameraActivateAction"}}>Activate</button>
+  {{/if}}
+{{else}}
+Does not support commands
+{{/if}}
+</div>
+
+{{#link-to 'single' name}}<img id="camera-{{name}}" class="camera50" src="" height=480 width=640 />{{/link-to}}
