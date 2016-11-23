@@ -11,17 +11,17 @@
     <div style="margin-top:10px;">
       <button class="ui negative basic button" {{action 'doDeleteAction' file}}>Delete</button>
       <button class="ui positive basic button" {{action 'doSaveAction' file}}>Save</button>
-      <a href="rtmp://10.69.0.25:4205/raw-motion-files/{{file}}.avi">
+      <a href="rtmp://{{node.getHostAndPortProperty}}/raw-motion-files/{{file}}.avi">
         <button class="ui primary basic button">Play</button>
       </a>
-      <a href="vlc-x-callback://x-callback-url/stream?url=http://10.69.0.25:4205/raw-motion-files/{{file}}.avi">
+      <a href="vlc-x-callback://x-callback-url/stream?url=http://{{node.getHostAndPortProperty}}/raw-motion-files/{{file}}.avi">
         <button class="ui primary basic button">Play in VLC</button>
       </a>
     </div>
   </div>
 
   <div style="margin-top: 10px;">
-    <img style="max-width: 640px;" src="http://10.69.0.25:4205/raw-motion-files/{{file}}.jpg">
+    <img style="max-width: 640px;" src="http://{{node.getHostAndPortProperty}}/raw-motion-files/{{file}}.jpg">
   </div>
 </div>
 {{/each}}

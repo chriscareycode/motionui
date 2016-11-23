@@ -67,7 +67,7 @@ export default Ember.Component.extend({
 
     const server = this.get('name');
     const hostAndPort = this.get('node').getHostAndPort();
-    const url = 'http://' + hostAndPort + '/api/motion/command/' + server + '/0/detection/status';
+    const url = 'http://' + hostAndPort + '/api/motion/command/' + server + '/0/' + action;
     const postdata = {
       one: '1',
       two: '2'
@@ -114,7 +114,7 @@ export default Ember.Component.extend({
           this.set('isDetectionStatusActive', false);
         }
       } else {
-        console.log('got response failure')
+        console.log('got response failure');
       }
     });
   }

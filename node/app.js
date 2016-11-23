@@ -16,7 +16,7 @@ var http = require('http');
 var url = require('url');
 var fs = require('fs');
 var glob = require('glob');
-
+var path = require('path');
 var bodyParser = require('body-parser');
 var request = require('request');
 
@@ -301,7 +301,7 @@ app.post('/api/save', function(req, res) {
 
 
 app.get('*', function(req, res) {
-
+  res.sendFile('index.html', { root: path.join(__dirname, '../dist') });
 });
 
 
